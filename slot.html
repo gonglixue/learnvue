@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+
+<h3>单个slot</h3>
+<template id="child01">
+    <div>this is temp01 component</div>
+    <slot>
+        如果没有分发内容，这里将会被显示
+    </slot>
+</template>
+
+<div id="dr01">
+    <child01></child01>
+    <br>
+    <child01>
+        <div>这里有新内容01</div>
+        <div>这里有新内容02</div>
+    </child01>
+</div>
+
+<script>
+    var child01 = Vue.extend({
+        template:'#child01'
+    })
+    var dr01 = new Vue({
+        el:'#dr01',
+        components:{
+            "child01":child01
+        }
+    })
+</script>
+
+</body>
+</html>

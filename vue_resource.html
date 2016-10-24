@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/vue.resource/1.0.3/vue-resource.min.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <template v-for="item in list">
+        <p>文章ID:<span>{{item.articleId}}</span></p>
+        <p>推荐文章标题：<span>{{item.articleTitle}}</span></p>
+        <p>发布时间：<span>{{item.publishAt}}</span></p>
+        <hr>
+    </template>
+</div>
+
+<script>
+    var demo = new Vue({
+        el:'#app',
+        data:{
+            gridData:[],
+            apiUrl:'http://192.168.2.11:8080/eeview/api/index/banner',
+            list:[]
+        },
+        ready:function(){
+            this.getCustomers();
+        },
+        methods:{
+            getCustomers:function(){
+                this.$http.get(this.apiUrl).then(function(response){
+                    this.gridData = response.data;
+                    this.list = this.gridData.data.list;
+                })
+                .catch(function(response){
+                    console.log(response)
+                })
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

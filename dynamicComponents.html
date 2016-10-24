@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+
+<h2>动态组建</h2>
+<!--定义三个temp模板，用于切换-->
+<template id="temp-tab01">
+    <div>this is tab01</div>
+</template>
+
+<template id="temp-tab02">
+    <div>this is tab02</div>
+</template>
+
+<template id="temp-tab03">
+    <div>this is tab03</div>
+</template>
+
+<div id="dr01">
+    <!--导航栏-->
+    <div class="border cf">
+        <ul>
+            <li><a href="javascript:void(0);" v-on:click="toggleTabs(tab01Text);">{{tab01Text}}</a></li>
+            <li><a href="javascript:void(0);" v-on:click="toggleTabs(tab02Text);">{{tab02Text}}</a></li>
+            <li><a href="javascript:void(0);" v-on:click="toggleTabs(tab03Text);">{{tab03Text}}</a></li>
+        </ul>
+    </div>
+
+    <div class="border" style="height:100px;">
+        <component :is="currentView" keep-alive></component>
+    </div>
+</div>
+
+<script>
+    var tab01 = Vue.extend({
+        template: '#temp-tab01'
+    });
+    var tab02 = Vue.extend({
+        template: '#temp-tab02'
+    });
+    var tab03 = Vue.extend({
+        template:'#temp-tab03'
+    });
+
+    var dr01 = new Vue({
+        el:'#dr01',
+        data:{
+            tab01Text:"tab01",
+            tab02Text:"tab02",
+            tab03Text:"tab03",
+            currentView:'tab01'
+
+        },
+        components:{
+            tab01:tab01,
+            tab02:tab02,
+            tab03:tab03
+        },
+        methods:{
+            toggleTabs:function(tabText){
+                this.currentView = tabText;
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

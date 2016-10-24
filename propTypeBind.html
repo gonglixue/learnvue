@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+
+<h2>Prop类型绑定（单向、双向）</h2>
+<div id="dr05">
+    <div>
+        <div>vue实例</div>
+        <input v-model="name">
+    </div>
+    <br>
+    <div>
+        <div>component组件（默认）：</div>
+        <child05 :my-message05="name"></child05>
+        <div>component组件（once）：</div>
+        <child05 :my-message05.once="name"></child05>
+        <div>component组件（sync）：</div>
+        <child05 :my-message05.sync="name"></child05>
+    </div>
+</div>
+
+<script>
+    Vue.component('child05',{
+        props:["myMessage05"],
+        template:"<input type='text' v-model='myMessage05'/>"
+    });
+    var dr05 = new Vue({
+        el:'#dr05',
+        data:{
+            name: 'DarkRanger'
+        }
+    })
+</script>
+
+</body>
+</html>

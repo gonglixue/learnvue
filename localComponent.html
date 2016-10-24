@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<h2>局部注册</h2>
+<div id="dr0201">
+    <span>3.下面的是一个局部的构造器（在dr0201中，使用了&lt;local-component&gt;，因为没有全局的
+        &lt;local-component&gt;或者局部的注册&lt;local-component&gt;，所以这里不显示下面的组件，
+        并且在控制台有警告）</span>
+    <local-component></local-component>
+</div>
+
+<div id="dr0202">
+    <span>4.下面的是一个局部的构造器</span>
+    <local-component></local-component>
+</div>
+
+<script>
+    var LocalCompoennt = Vue.extend({
+        template: "<div>Hello, this is a local component</div>"
+    });
+    var dr0201 = new Vue({
+        el:'#dr0201'
+    })
+    //如果要在某一个Vue组件中使用，则把创建的组件构造器添加到components中
+    var dr0202 = new Vue({
+        el:'#dr0202',
+        components:{
+            'local-component':LocalCompoennt
+        }
+    })
+
+</script>
+</body>
+</html>

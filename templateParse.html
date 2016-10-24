@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+
+<h2>模板解析</h2>
+
+<div id="dr06">
+     <h3>遍历vue实例中的data</h3>
+     <div v-for="item in items">
+         <div>index; {{ $index }}, name: {{item.name}}, desc: {{item.desc}}</div>
+     </div>
+     <h3>遍历vue组件中的data</h3>
+     <div>
+         <temp-component></temp-component>
+     </div>
+</div>
+
+<script>
+    //模板解析
+    //这里的data数据只能供模板使用
+    var TempComponent = Vue.extend({
+        data:function(){
+            return {
+                tempItems:[{
+                    name:"tempNameA",
+                    desc:"tempDescA"
+                },{
+                    name:"tempNameB",
+                    desc:"temDescB"
+                },{
+                    name:"tempNameC",
+                    desc:"tempDescC"
+                }
+                ]
+            }
+        },
+        // 在模板中定义的有item遍历，其中tempItems的数据只能来源于TempCompoennt中的data数据
+        template:"<div v-for='tempItem in tempItems'>index:{{$index}},name:{{tempItem.name}},desc:{{tempItem.desc}}</div>"
+    });
+
+    var dr06 = new Vue({
+        el: '#dr06',
+        data:{
+            items:[{
+                name:'name01',
+                desc:'desc01'
+            },{
+                name:'name02',
+                desc:'desc02'
+            },{
+                name:'name03',
+                desc:'desc03'
+            }]
+        },
+        components:{
+            'temp-component':TempComponent
+        }
+    })
+</script>
+
+</body>
+</html>

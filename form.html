@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="formapp">
+    <p>{{message}}</p>
+    <textarea v-model="message" v-on:keyup.space="print"></textarea>
+
+    <input type="checkbox" id="jack" value="jack" v-model="checkednames">
+    <label for="jack">Jack</label>
+    <input type="checkbox" id="john" value="john" v-model="checkednames">
+    <label for="john">john</label>
+    <input type="checkbox" id="mike" value="mike" v-model="checkednames">
+    <label for="mike">mike</label>
+    <br>
+    <span>checked names: {{checkednames | json }}</span>
+
+    <hr>
+
+    <input type="radio" id="one" value="one" v-model="picked">
+    <label for="one">one</label>
+    <input type="radio" id="two" value="two" v-model="picked">
+    <label for="two">two</label>
+    <br>
+    <span>picked: {{picked}}</span>
+
+    <hr>
+    <select v-model="selected">
+        <option selected value="1">A</option>
+        <option>B</option>
+        <option value="3">C</option>
+    </select>
+    <span>selected: {{selected}}</span>
+    <hr>
+
+    <input type="text" v-model="inputNum" debounce="1000" number>
+    <span>{{inputNum}}</span>
+</div>
+
+<script>
+    var vm = new Vue({
+        el:'#formapp',
+        data:{
+            message:'',
+            checkednames:[],
+            picked:'',
+            selected: '',
+            inputNum:''
+        },
+        methods:{
+            print: function(){
+                console.log(this.message)
+            }
+        }
+    });
+
+
+
+</script>
+
+</body>
+</html>

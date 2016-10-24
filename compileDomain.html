@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<h2>编译作用域</h2>
+<template id="child03">
+    <div>the two items following is child msg:</div>
+    <div>{{ cmsg_01 }}</div>
+    <div>{{ cmsg_02 }}</div>
+    <br>
+    <div>the three items following is parent msg:</div>
+    <slot name="s1"></slot>
+    <slot></slot>
+    <slot name="s2"></slot>
+</template>
+
+<div id="dr03">
+    <child03>
+        <div slot="s1">{{msg01}}</div>
+        <div slot="s2">{{msg02}}</div>
+        <div>{{msg03}}</div>
+    </child03>
+</div>
+
+<script>
+    var child03 = Vue.extend({
+        data:function(){
+            return {
+                cmsg_01:"this is child msg_01",
+                cmsg_02:"this is child msg_02"
+            }
+        },
+        template: '#child03'
+    })
+    var dr03 = new Vue({
+        el:'#dr03',
+        data:{
+            msg01:"this is parent msg01",
+            msg02:"this is parent msg02",
+            msg03:"this is parent msg03"
+        },
+        components:{
+            "child03":child03
+        }
+    })
+</script>
+</body>
+</html>
